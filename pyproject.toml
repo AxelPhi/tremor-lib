@@ -14,9 +14,10 @@ httpx-oauth = "^0.3.6"
 pytest = "^6.2.4"
 pytest-asyncio = "^0.15.1"
 pytest-cov = "^2.12.1"
+pytest-mock  = "^3.6.1"
+pytest-flake8 = "^1.0.7"
 black = "^21.7b0"
 flake8 = "^3.9.2"
-mypy = "^0.910"
 isort = "^5.9.3"
 pre-commit = "^2.14.0"
 
@@ -31,12 +32,13 @@ force_grid_wrap = 0
 use_parentheses = true
 line_length = 79
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.pytest.ini_options]
 minversion = "6.2"
+addopts = "--flake8 --verbose"
 testpaths = [
     "tests"
 ]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
