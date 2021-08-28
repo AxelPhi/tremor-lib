@@ -1,10 +1,16 @@
 import importlib
 import pkgutil
 
+import tremor.connectors.dummy as tremor_connector_dummy
+
 PLUGIN_PREFIX = "tremor_connector"
 
 
-async def discover_connectors() -> dict:
+def collect_internal_connectors() -> dict:
+    return {tremor_connector_dummy.__name__: tremor_connector_dummy}
+
+
+def discover_external_connectors() -> dict:
     return {
         name: importlib.import_module(name)
         for finder, name, ispkg in pkgutil.iter_modules()
@@ -12,4 +18,10 @@ async def discover_connectors() -> dict:
     }
 
 
-__all__ = ["discover_connectors"]
+def get_connectors() -> dict:
+    connectors = collect_internal_connectors()
+    connectors.update(discover_external_connectors())
+    return connectors
+
+
+__all__ = ["get_connectors"]

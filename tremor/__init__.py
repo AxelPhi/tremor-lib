@@ -1,13 +1,13 @@
 import asyncio
 
-from tremor.connectors import discover_connectors
+from tremor.connectors import get_connectors
 from tremor.eventbus import EventBus
 
 
 async def myCoroutine():
     event_bus = EventBus()
     event_bus.listen(lambda x: print(x), None)
-    cts = await discover_connectors()
+    cts = get_connectors()
     for connector_name, connector in cts.items():
         print(connector_name)
         try:
