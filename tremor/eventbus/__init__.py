@@ -1,8 +1,8 @@
 import asyncio
-from typing import List
+from typing import List, Union
 
 from tremor.events import BaseEvent
-from tremor.events.filters import BaseFilter
+from tremor.events.filters import BaseFilter, PassThroughFilter
 
 
 class EventBus:
@@ -13,13 +13,21 @@ class EventBus:
         await self.event_queue.put(event)
 
     async def listen(
-        self, event_filters: List[BaseFilter] = None, timeout: float = None
+        self,
+        event_filter: Union[BaseFilter, List[BaseFilter]] = None,
+        timeout: float = None,
     ) -> BaseEvent:
+        filters = [PassThroughFilter()]
+        if event_filter:
+            if isinstance(event_filter, BaseFilter):
+                filters = [event_filter]
+            else:
+                filters = event_filter
         while True:
             if timeout:
-                event = asyncio.wait_for(self.event_queue, timeout)
+                event = await asyncio.wait_for(self.event_queue.get(), timeout)
             else:
                 event = await self.event_queue.get()
-            for event_filter in event_filters:
+            for event_filter in filters:
                 if event_filter.filter(event):
                     return event

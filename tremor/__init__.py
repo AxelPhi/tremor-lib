@@ -3,10 +3,6 @@ import logging
 
 from tremor.connectors import get_connectors
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s %(levelname)s:%(message)s"
-)
-
 log = logging.getLogger(__name__)
 
 
@@ -28,4 +24,7 @@ def main():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s %(levelname)s:%(message)s"
+    )
     main()
