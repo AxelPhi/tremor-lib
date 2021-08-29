@@ -1,5 +1,5 @@
-from tremor.eventbus.events import BaseEvent
-from tremor.eventbus.filters import PassThroughFilter, SourceFilter
+from events import BaseEvent
+from events.filters import PassThroughFilter, SourceFilter
 
 
 def test_passthrough_filter():

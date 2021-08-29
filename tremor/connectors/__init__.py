@@ -1,12 +1,12 @@
 import importlib
 import pkgutil
 
-import tremor.connectors.dummy as tremor_connector_dummy
-
 PLUGIN_PREFIX = "tremor_connector"
 
 
 def collect_internal_connectors() -> dict:
+    import tremor.connectors.dummy as tremor_connector_dummy
+
     return {tremor_connector_dummy.__name__: tremor_connector_dummy}
 
 
