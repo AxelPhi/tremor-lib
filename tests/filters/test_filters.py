@@ -1,5 +1,9 @@
-from events import BaseEvent
-from events.filters import CategoryFilter, PassThroughFilter, SourceFilter
+from tremor.events import BaseEvent
+from tremor.events.filters import (
+    CategoryFilter,
+    PassThroughFilter,
+    SourceFilter,
+)
 
 
 def test_passthrough_filter():

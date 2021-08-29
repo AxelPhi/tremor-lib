@@ -34,7 +34,7 @@ line_length = 79
 
 [tool.pytest.ini_options]
 minversion = "6.2"
-addopts = "--flake8 --verbose"
+addopts = "--flake8"
 testpaths = [
     "tests"
 ]
