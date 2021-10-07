@@ -2,11 +2,13 @@ import asyncio
 import logging
 
 from tremor.connectors import get_connectors
+from tremor.eventbus import EventBus
 
 log = logging.getLogger(__name__)
 
 
 async def main_routine():
+    event_bus = EventBus()
     cts = get_connectors()
     if not cts:
         log.warning("No connectors found.")
@@ -14,6 +16,7 @@ async def main_routine():
     log.info("Found connectors...")
     for connector_name, connector in cts.items():
         log.info(f"Found connector: {connector_name} with module {connector}")
+        await connector.init(event_bus)
 
 
 def main():

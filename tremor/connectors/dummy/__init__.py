@@ -1,7 +1,7 @@
 from tremor.eventbus import EventBus
 
 
-def init(event_bus: EventBus):
+async def init(event_bus: EventBus):
     pass
 
 
